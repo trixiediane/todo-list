@@ -13,7 +13,7 @@ A simple ReactJS project that displays a list of todos, and allows you to add, e
     cd todo-list
     ```
     
-2. **Compile Assets:**
+2. **Run the ff:**
 
     ```bash
     npm install
