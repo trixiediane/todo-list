@@ -12,6 +12,8 @@ function App() {
     'Pick up the kids from school'
   ]);
 
+  const [todoValue, setTodoValue] = useState('');
+
   // This function is responsible for adding a new todo to the list.
   // It takes 'newTodo' (the new task) as an argument.
   function handleAddTodos(newTodo) {
@@ -21,7 +23,7 @@ function App() {
     setTodos(newTodoList);
   }
 
-  
+
   function handleDeleteTodo(index) {
     // Create a new array by filtering out the todo at the specified index
     const newTodoList = todos.filter((todo, todoIndex) => {
@@ -34,16 +36,19 @@ function App() {
 
 
   function handleEditTodo(index) {
+    const valueToBeEdited = todos[index]
+    setTodoValue(valueToBeEdited)
 
+    handleDeleteTodo(index)
   }
 
   return (
     <>
       {/* Render the TodoInput component, passing the handleAddTodos function as a prop */}
-      <TodoInput handleAddTodos={handleAddTodos} />
+      <TodoInput todoValue={todoValue} setTodoValue={setTodoValue} handleAddTodos={handleAddTodos} />
 
       {/* Render the TodoList component, passing the current list of todos as a prop */}
-      <TodoList handleDeleteTodo={handleDeleteTodo} todos={todos} />
+      <TodoList handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} todos={todos} />
     </>
   );
 }

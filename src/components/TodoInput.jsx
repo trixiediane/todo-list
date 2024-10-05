@@ -5,11 +5,7 @@ import { useState } from "react";
 export default function TodoInput(props) {
     // Destructure the handleAddTodos function from the props.
     // This function is passed from the parent component (App) and will be used to add new todos.
-    const { handleAddTodos } = props;
-
-    // Declare a state variable 'todoValue' to store the current value of the input field.
-    // 'setTodoValue' is the function used to update 'todoValue'.
-    const [todoValue, setTodoValue] = useState('');
+    const { handleAddTodos, todoValue, setTodoValue } = props;
 
     return (
         <header>
