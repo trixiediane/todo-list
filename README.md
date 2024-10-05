@@ -9,7 +9,7 @@ A simple ReactJS project that displays a list of todos, and allows you to add, e
 1. **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/trixiediane/anime-verse.git](https://github.com/trixiediane/todo-list.git)
+    git clone https://github.com/trixiediane/todo-list.git
     cd todo-list
     ```
     
