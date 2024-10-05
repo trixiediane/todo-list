@@ -1,24 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 
 function App() {
   // Define a state variable 'todos' to keep track of the list of todos.
-  // The initial value is an array of three items (strings).
   // The 'setTodos' function is used to update the 'todos' state.
-  const [todos, setTodos] = useState([
-    'Go to the gym',
-    'Eat more fruits and veggies',
-    'Pick up the kids from school'
-  ]);
+  const [todos, setTodos] = useState([]);
 
-  const [todoValue, setTodoValue] = useState('');
+  const [todoValue, setTodoValue] = useState('')
+  function persistData(newList) {
+    localStorage.setItem('todos', JSON.stringify({
+      todos: newList
+    }))
+  }
 
   // This function is responsible for adding a new todo to the list.
   // It takes 'newTodo' (the new task) as an argument.
   function handleAddTodos(newTodo) {
     // Create a new array that includes the current todos and the new todo.
     const newTodoList = [...todos, newTodo]; // Using the spread operator to copy all current todos
+
+    persistData(newTodoList)
     // Update the 'todos' state with the new list.
     setTodos(newTodoList);
   }
@@ -30,6 +32,7 @@ function App() {
       return todoIndex !== index
     })
 
+    persistData(newTodoList)
     // Update the state with the new array of todos
     setTodos(newTodoList)
   }
@@ -41,6 +44,19 @@ function App() {
 
     handleDeleteTodo(index)
   }
+
+  useEffect(() => {
+    if (!localStorage) {
+      return
+    }
+
+    let localTodos = localStorage.getItem('todos')
+    if (!localTodos) {
+      return
+    }
+    localTodos = JSON.parse(localTodos).todos
+    setTodos(localTodos)
+  }, [])
 
   return (
     <>
